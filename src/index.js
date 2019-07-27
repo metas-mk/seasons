@@ -9,24 +9,13 @@ class App extends React.Component {
         // initialize state
         // THIS IS THE ONLY TIME we do direct assignement to this.statte!!
         this.state = {lat: null, errorMessage: ''};
-
-        window.navigator.geolocation.getCurrentPosition(
-            position => {
-                // we called setState!!!
-                this.setState({lat: position.coords.latitude});
-            },
-            //console.log(position), // success callback
-            err => { 
-                this.setState({errorMessage: err.message});
-            }
-        );
     }
 
     componentDidMount() {
-        console.log('My component was rendered to the screen');
-    }
-    componentDidUpdate() {
-        console.log('My component was just updated ... it rerendered');
+        window.navigator.geolocation.getCurrentPosition(
+            position => this.setState({lat: position.coords.latitude}),
+            err => this.setState({errorMessage: err.message})
+        );
     }
     
     // React says we have to define render!! If not en error will be thrown
