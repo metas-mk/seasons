@@ -2,14 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 class App extends React.Component {
-    // every time a component is instantiated, the constructor method is invoked
-    constructor(props) {
-        super(props);
-
-        // initialize state
-        // THIS IS THE ONLY TIME we do direct assignement to this.statte!!
-        this.state = {lat: null, errorMessage: ''};
-    }
+    state = {lat: null, errorMessage: ''};
 
     componentDidMount() {
         window.navigator.geolocation.getCurrentPosition(
@@ -17,7 +10,7 @@ class App extends React.Component {
             err => this.setState({errorMessage: err.message})
         );
     }
-    
+
     // React says we have to define render!! If not en error will be thrown
     render() {
         if (this.state.errorMessage && !this.state.lat) {
